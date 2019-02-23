@@ -10,15 +10,15 @@ import 'rxjs/add/operator/finally';
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor(private authUserService: AuthUserService) {
-  }
+	constructor(private authUserService: AuthUserService) {
+	}
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      const request = this.buildRequest(req);
+	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		const request = this.buildRequest(req);
 
-      // TODO start spinner
+		// TODO start spinner
 
-      return next.handle(request)
+		return next.handle(request)
 			.catch((error, caught) => {
 				this.handleError(error);
 				return Observable.throw(error);
@@ -26,21 +26,21 @@ export class HttpInterceptorService implements HttpInterceptor {
 			.finally(() => {
 				// TODO stop spinner
 			}) as any;
-    }
+	}
 
-    private buildRequest(request: HttpRequest<any>): HttpRequest<any> {
-      const token = this.authUserService.getUserTokenFromMemory();
-      return request.clone({
-        url: `${environment.apiUrl}${request.url}`,
-        // withCredentials: true,
-        headers: !token ? request.headers : request.headers.set('Authorization', `Bearer ${token}`)
-      });
-    }
+	private buildRequest(request: HttpRequest<any>): HttpRequest<any> {
+		const token = this.authUserService.getUserTokenFromMemory();
+		return request.clone({
+			url: `${environment.apiUrl}${request.url}`,
+			// withCredentials: true,
+			headers: !token ? request.headers : request.headers.set('Authorization', `Bearer ${token}`)
+		});
+	}
 
-    private handleError(error) {
-      console.log(error);
-      // TODO
-    }
+	private handleError(error) {
+		console.log(error);
+		// TODO
+	}
 }
 
 export function HttpInterceptorServiceFactory(authUserService: AuthUserService) {

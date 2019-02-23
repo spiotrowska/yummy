@@ -14,24 +14,24 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RecipesComponent,
-    DashboardComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgHttpLoaderModule
-  ],
-  providers: [
-    AuthUserService,
-    JwtUserService,
-    AuthGuard
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		RecipesComponent,
+		DashboardComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		ReactiveFormsModule,
+		HttpClientModule,
+		NgHttpLoaderModule
+	],
+	providers: [
+		AuthUserService,
+		JwtUserService,
+		AuthGuard
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

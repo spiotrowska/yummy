@@ -6,18 +6,17 @@ import { NgModule } from '@angular/core';
 import { RecipesComponent } from './recipes/recipes.component';
 
 const appRoutes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'recipes', component: RecipesComponent, canActivate: [AuthGuard] }
+	{ path: '', component: DashboardComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'recipes', component: RecipesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes)
-  ],
-
-  exports: [
-    RouterModule
-  ]
+	imports: [
+		RouterModule.forRoot(appRoutes)
+	],
+	exports: [
+		RouterModule
+	]
 })
 export class AppRoutingModule { }

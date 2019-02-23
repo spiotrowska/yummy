@@ -5,16 +5,15 @@ import { CanActivate } from '@angular/router';
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private authUserService: AuthUserService) {
-  }
+	constructor(private authUserService: AuthUserService) {
+	}
 
-  canActivate() {
-    if (this.authUserService.isUserLogged) {
-      return true;
-    }
-
-    this.authUserService.logInUserBasedOnMemory();
+	canActivate() {
+		if (this.authUserService.isUserLogged) {
+			return true;
+		}
+		this.authUserService.logInUserBasedOnMemory();
 		return this.authUserService.isUserLogged;
-  }
+	}
 
 }

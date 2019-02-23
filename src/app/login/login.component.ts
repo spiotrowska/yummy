@@ -6,22 +6,21 @@ import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less'],
-  providers: [AuthService]
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.less'],
+	providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
-  private loginForm: FormGroup;
+	private loginForm: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: Router,
-    private authService: AuthService,
-    private authUserService: AuthUserService
-  ) { }
+	constructor(
+		private formBuilder: FormBuilder,
+		private route: Router,
+		private authService: AuthService,
+		private authUserService: AuthUserService) { }
 
-  ngOnInit() {
+	ngOnInit() {
 		this.buildForm();
 	}
 
@@ -34,20 +33,20 @@ export class LoginComponent implements OnInit {
 			email: ['', [Validators.required]],
 			password: ['', [Validators.required, Validators.minLength(4)]]
 		});
-  }
+	}
 
-  protected login(user: LoginUserModel): void {
+	protected login(user: LoginUserModel): void {
 		this.authService.authenticateUser(user).subscribe(
-      (data: { token: string }) => {
-			  this.authUserService.authorizeUser(data.token);
-		    this.redirectToRecipes();
-      },
-      error => {
-        console.log(error);
-      });
-  }
+			(data: { token: string }) => {
+				this.authUserService.authorizeUser(data.token);
+				this.redirectToRecipes();
+			},
+			error => {
+				console.log(error);
+			});
+	}
 
-  private redirectToRecipes(): void {
+	private redirectToRecipes(): void {
 		this.route.navigate(['/recipes']);
 	}
 

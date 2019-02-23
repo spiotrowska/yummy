@@ -11,6 +11,6 @@ export class AuthService {
 
 	authenticateUser(user: LoginUserModel): Observable<{ token: string }> {
 		return this.http.post<{ token: string }>(`login`, user, { withCredentials: false });
-  }
+	}
 
 }
