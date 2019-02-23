@@ -1,13 +1,16 @@
-import { UserModel } from './../_models/user.model';
+import { JwtUserService } from './jwt-user.service';
 import { Router } from '@angular/router';
 import { AuthUserModel } from '../_models/auth-user.model';
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 @Injectable()
 export class AuthUserService {
   private authUser: AuthUserModel;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private jwtUserService: JwtUserService) {
       this.authUser = new AuthUserModel();
     }
 
@@ -18,9 +21,8 @@ export class AuthUserService {
   authorizeUser(token: string) {
     this.authUser.token = token;
 		this.authUser.isLogged = true;
-    const jwtUser = this.parseJwt(token);
-    console.log(jwtUser);
-		// TODO this.userIdentityService.setUserIdentity(jwtUser);
+    const jwtUser = this.jwtUserService.parseJwt(token);
+    this.jwtUserService.setJwtUser(jwtUser);
 		this.rememberAuthUser(this.authUser, true);
   }
 
@@ -29,21 +31,52 @@ export class AuthUserService {
       localStorage.setItem('user-token', user.token);
 		} else {
 			sessionStorage.setItem('user-token', user.token);
+    }
+  }
+
+  logInUserBasedOnMemory() {
+    const userTokenFromMemory = this.getUserTokenFromMemory();
+    if (!!userTokenFromMemory) {
+			this.authorizeUser(userTokenFromMemory );
+		} else {
+			this.logOutUser();
 		}
   }
 
-  private parseJwt(token: string): UserModel {
-    // TODO
-    console.log('token:' + token);
-    return {userId: '1', email: 'sw@gmail.com', firstName: 's', lastName: 'w', Exp: new Date()};
+  logOutUser() {
+    this.clearAuthUser();
+    this.clearStorage();
+    this.router.navigate(['/']);
+  }
 
-		// const base64Url = token.split('.')[1];
-		// if (base64Url) {
-		// 	const base64 = base64Url.replace('-', '+').replace('_', '/');
-		// 	return JSON.parse(window.atob(base64));
-		// } else {
-		// 	return null;
-		// }
+  getUserTokenFromMemory() {
+    const token = localStorage.getItem('user-token') || sessionStorage.getItem('user-token');
+    if (!token || this.checkTokenExpired(token)) {
+			return null;
+		}
+		return token;
+  }
+
+  checkTokenExpired(token: string): boolean {
+    const jwtUser = this.jwtUserService.parseJwt(token);
+    console.log(jwtUser);
+    if (moment(jwtUser.Exp).isBefore()) {
+      this.clearAuthUser();
+      this.clearStorage();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private clearAuthUser() {
+    delete this.authUser.token;
+		this.authUser.isLogged = false;
+  }
+
+  private clearStorage() {
+		sessionStorage.clear();
+		localStorage.clear();
 	}
 
 }

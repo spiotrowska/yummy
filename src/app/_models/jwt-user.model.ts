@@ -1,4 +1,4 @@
-export class UserModel {
+export class JwtUserModel {
   userId: string;
   email: string;
   firstName: string;

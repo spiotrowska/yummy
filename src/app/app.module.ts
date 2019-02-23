@@ -1,3 +1,6 @@
+import { NgHttpLoaderModule } from './_helpers/http-loader.module';
+import { AuthGuard } from './_guards/auth.guard';
+import { JwtUserService } from './_services/jwt-user.service';
 import { AuthUserService } from './_services/auth-user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,10 +24,13 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgHttpLoaderModule
   ],
   providers: [
-    AuthUserService
+    AuthUserService,
+    JwtUserService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

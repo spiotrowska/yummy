@@ -1,5 +1,4 @@
 import { AuthUserService } from './../_services/auth-user.service';
-import { BaseReturnModel } from './../_models/base-return.model';
 import { LoginUserModel } from './../_models/login-user.model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -38,10 +37,14 @@ export class LoginComponent implements OnInit {
   }
 
   protected login(user: LoginUserModel): void {
-		this.authService.authenticateUser(user).subscribe((data: { token: string }) => {
-			this.authUserService.authorizeUser(data.token);
-		  this.redirectToRecipes();
-    	});
+		this.authService.authenticateUser(user).subscribe(
+      (data: { token: string }) => {
+			  this.authUserService.authorizeUser(data.token);
+		    this.redirectToRecipes();
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   private redirectToRecipes(): void {
