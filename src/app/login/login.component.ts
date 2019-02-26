@@ -35,19 +35,16 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
-	protected login(user: LoginUserModel): void {
+	protected login(user: LoginUserModel) {
 		this.authService.authenticateUser(user).subscribe(
-			(data: { token: string }) => {
-				this.authUserService.authorizeUser(data.token);
+			(token: string) => {
+				this.authUserService.authorizeUser(token);
 				this.redirectToRecipes();
-			},
-			error => {
-				console.log(error);
 			});
 	}
 
-	private redirectToRecipes(): void {
-		this.route.navigate(['/recipes']);
+	private redirectToRecipes() {
+		this.route.navigate(['/private/recipes']);
 	}
 
 }

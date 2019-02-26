@@ -12,20 +12,32 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipesComponent } from './recipes/recipes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PublicComponent } from './public/public.component';
+import { PrivateComponent } from './private/private.component';
+import { IngredientsComponent } from './ingredients/ingredients.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
 		RecipesComponent,
-		DashboardComponent
+		DashboardComponent,
+		HeaderComponent,
+		FooterComponent,
+		PublicComponent,
+		PrivateComponent,
+		IngredientsComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		ReactiveFormsModule,
 		HttpClientModule,
-		NgHttpLoaderModule
+		NgHttpLoaderModule,
+		NgbModule.forRoot()
 	],
 	providers: [
 		AuthUserService,

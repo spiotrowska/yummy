@@ -19,7 +19,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 		// TODO start spinner
 
 		return next.handle(request)
-			.catch((error, caught) => {
+			.catch((error) => {
 				this.handleError(error);
 				return Observable.throw(error);
 			})
@@ -32,7 +32,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 		const token = this.authUserService.getUserTokenFromMemory();
 		return request.clone({
 			url: `${environment.apiUrl}${request.url}`,
-			// withCredentials: true,
+			withCredentials: true,
 			headers: !token ? request.headers : request.headers.set('Authorization', `Bearer ${token}`)
 		});
 	}

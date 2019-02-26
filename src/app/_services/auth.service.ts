@@ -9,8 +9,8 @@ export class AuthService {
 	constructor(private http: HttpClient) {
 	}
 
-	authenticateUser(user: LoginUserModel): Observable<{ token: string }> {
-		return this.http.post<{ token: string }>(`login`, user, { withCredentials: false });
+	authenticateUser(user: LoginUserModel): Observable<string> {
+		return this.http.post('auth/login', user, { withCredentials: false, responseType: 'text' });
 	}
 
 }

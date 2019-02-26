@@ -59,7 +59,6 @@ export class AuthUserService {
 
 	checkTokenExpired(token: string): boolean {
 		const jwtUser = this.jwtUserService.parseJwt(token);
-		console.log(jwtUser);
 		if (moment(jwtUser.Exp).isBefore()) {
 			this.clearAuthUser();
 			this.clearStorage();
