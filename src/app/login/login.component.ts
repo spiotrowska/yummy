@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
 			(token: string) => {
 				this.authUserService.authorizeUser(token);
 				this.redirectToRecipes();
-			});
+			}
+		);
 	}
 
 	private redirectToRecipes() {

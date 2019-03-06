@@ -18,6 +18,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PublicComponent } from './public/public.component';
 import { PrivateComponent } from './private/private.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
+import { SettingsComponent } from './settings/settings.component';
+import { RecipeComponent } from './recipes/recipe/recipe.component';
 
 @NgModule({
 	declarations: [
@@ -29,7 +31,9 @@ import { IngredientsComponent } from './ingredients/ingredients.component';
 		FooterComponent,
 		PublicComponent,
 		PrivateComponent,
-		IngredientsComponent
+		IngredientsComponent,
+		SettingsComponent,
+		RecipeComponent
 	],
 	imports: [
 		BrowserModule,

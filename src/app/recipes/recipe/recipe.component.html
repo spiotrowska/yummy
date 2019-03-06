@@ -1,0 +1,35 @@
+<div class="p-3">
+	<div class="card" *ngIf="recipe">
+    	<div class="row">
+        	<div class="col-md-5 m-1">
+				<img src="../../../assets/tort-z-fasoli90270146.jpg" class="img-fluid" alt="">
+				<p>{{recipe.summary}}</p>
+	        </div>
+	        <div class="col-md-6 m-1">
+    	        <div class="card-block">
+					<h1>{{recipe.name}}</h1>
+					<h5>Autor: {{recipe.userFullName}}</h5>
+					<i class="fa fa-clock-o mr-3"> 30 min.</i>
+					<i class="fa fa-signal mr-3"> łatwy</i>
+					<span class="mr-3"><img src="../../../assets/icon-kcal.svg" class="kcal-img"> {{recipe.totalKcal}} kcal</span>
+					<!-- <ngb-rating [rate]="3.75" [readonly]="true" max="5"></ngb-rating> 3.75<br><br> -->
+
+					<ng-template #t let-fill="fill">
+						<span class="star" [class.full]="fill === 100">
+						  <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+						</span>
+					</ng-template>
+					<ngb-rating [rate]="3.5" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating> 3.5
+
+					<br><br>
+					<h5>Składniki:</h5>
+					<ul>
+						<li *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}}</li>
+					</ul>
+					<h5>Sposób przygotowania:</h5>
+					<p>{{recipe.description}}</p>
+            	</div>
+	        </div>
+	    </div>
+	</div>
+</div>
