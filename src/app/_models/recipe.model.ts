@@ -1,4 +1,4 @@
-import { IngredientModel } from './ingredient.model';
+import { RecipeIngredientModel } from './recipe-ingredient.model';
 import { RecipeRatingModel } from './recipe-rating.model';
 
 export class RecipeModel {
@@ -8,9 +8,10 @@ export class RecipeModel {
 	description: string;
 	userId: string;
 	userFullName: string;
-	ingredients: IngredientModel[];
+	recipeIngredients: RecipeIngredientModel[];
 	difficultyLevel: number;
 	preparationTime: number;
 	totalKcal: number;
+	averageRate: number;
 	recipesRatings: RecipeRatingModel[];
 }

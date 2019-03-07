@@ -17,9 +17,10 @@ import { FooterComponent } from './footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PublicComponent } from './public/public.component';
 import { PrivateComponent } from './private/private.component';
-import { IngredientsComponent } from './ingredients/ingredients.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RecipeComponent } from './recipes/recipe/recipe.component';
+import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
+import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
 
 @NgModule({
 	declarations: [
@@ -31,9 +32,10 @@ import { RecipeComponent } from './recipes/recipe/recipe.component';
 		FooterComponent,
 		PublicComponent,
 		PrivateComponent,
-		IngredientsComponent,
 		SettingsComponent,
-		RecipeComponent
+		RecipeComponent,
+		AddRecipeComponent,
+		UserRecipesComponent
 	],
 	imports: [
 		BrowserModule,
@@ -41,7 +43,8 @@ import { RecipeComponent } from './recipes/recipe/recipe.component';
 		ReactiveFormsModule,
 		HttpClientModule,
 		NgHttpLoaderModule,
-		NgbModule.forRoot()
+		NgbModule.forRoot(),
+		ReactiveFormsModule
 	],
 	providers: [
 		AuthUserService,

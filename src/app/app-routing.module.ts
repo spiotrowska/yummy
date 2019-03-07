@@ -1,8 +1,9 @@
+import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
+import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { RecipeComponent } from './recipes/recipe/recipe.component';
 import { SettingsComponent } from './settings/settings.component';
 import { PrivateComponent } from './private/private.component';
 import { PublicComponent } from './public/public.component';
-import { IngredientsComponent } from './ingredients/ingredients.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
 			{ path: '', component: RecipesComponent },
 			{ path: ':id', component: RecipeComponent }
 		] },
-		{ path: 'ingredients', component: IngredientsComponent },
+		{ path: 'add-recipe', component: AddRecipeComponent },
+		{ path: 'user-recipes', component: UserRecipesComponent },
 		{ path: 'settings', component: SettingsComponent }
 	] }
 ];

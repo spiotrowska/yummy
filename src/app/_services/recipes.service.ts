@@ -16,4 +16,8 @@ export class RecipesService {
 	getRecipe(id: string): Observable<RecipeModel> {
 		return this.http.get<RecipeModel>(`recipes/${id}`);
 	}
+
+	createRecipe(recipe: RecipeModel): Observable<RecipeModel> {
+		return this.http.post<RecipeModel>('recipes', recipe);
+	}
 }
