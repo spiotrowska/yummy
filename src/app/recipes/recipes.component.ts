@@ -1,5 +1,4 @@
 import { AuthUserService } from './../_services/auth-user.service';
-import { Router } from '@angular/router';
 import { RecipesService } from './../_services/recipes.service';
 import { RecipeModel } from './../_models/recipe.model';
 import { Component, OnInit } from '@angular/core';
@@ -12,24 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipesComponent implements OnInit {
 	protected recipes: RecipeModel[];
+	protected recipeUrl: string;
 
 	constructor(
 		private recipesService: RecipesService,
-		private router: Router,
 		private authUserService: AuthUserService) { }
 
 	ngOnInit() {
 		this.getRecipes();
-	}
-
-	protected redirectToRecipe(recipeId: string) {
-		let recipeUrl: string;
-		if (this.authUserService.isUserLogged) {
-			recipeUrl = `private/recipes/${recipeId}`;
-		} else {
-			recipeUrl = `dashboard/${recipeId}`;
-		}
-		this.router.navigate([recipeUrl]);
+		this.setRecipeUrl();
 	}
 
 	private getRecipes() {
@@ -38,6 +28,14 @@ export class RecipesComponent implements OnInit {
 				this.recipes = recipes;
 			}
 		);
+	}
+
+	private setRecipeUrl() {
+		if (this.authUserService.isUserLogged) {
+			this.recipeUrl = 'private/recipes';
+		} else {
+			this.recipeUrl = 'dashboard';
+		}
 	}
 
 }

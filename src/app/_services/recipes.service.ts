@@ -13,6 +13,10 @@ export class RecipesService {
 		return this.http.get<RecipeModel[]>('recipes');
 	}
 
+	getUserRecipes(): Observable<RecipeModel[]> {
+		return this.http.get<RecipeModel[]>('recipes/users/current');
+	}
+
 	getRecipe(id: string): Observable<RecipeModel> {
 		return this.http.get<RecipeModel>(`recipes/${id}`);
 	}

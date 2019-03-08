@@ -17,15 +17,19 @@
 					<div formArrayName="recipeIngredients" *ngFor="let recipeIngredient of recipeIngredientsForm.controls; let i = index">
 						<div class="form-group row" [formGroupName]="i">
 							<div class="col-md-5">
-								<input id="{{ 'ingredient' + i }}" formControlName="ingredientId" class="form-control">
+								<select id="{{ 'ingredient' + i }}" formControlName="ingredientId" class="form-control">
+									<option *ngFor="let ingredient of ingredients" [value]="ingredient.id">{{ingredient.name}}</option>
+								</select>
 								<label attr.for="{{ 'ingredient' + i }}">Składnik</label>
 							</div>
 							<div class="col-md-2">
-								<input id="quantity" formControlName="quantity" class="form-control">
+								<input id="{{ 'quantity' + i }}" type="number" formControlName="quantity" class="form-control">
 								<label attr.for="{{ 'quantity' + i }}">Ilość</label>
 							</div>
 							<div class="col-md-2">
-								<input id="unit" formControlName="unit" class="form-control">
+								<select id="{{ 'unit' + i }}" formControlName="unit" class="form-control">
+									<option *ngFor="let unit of units" [value]="unit">{{UnitEnum[unit]}}</option>
+								</select>
 								<label attr.for="{{ 'unit' + i }}">Jednostka</label>
 							</div>
 							<div class="col-md-2">

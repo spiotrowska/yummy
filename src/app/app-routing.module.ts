@@ -1,3 +1,4 @@
+import { UserRecipeComponent } from './recipes/user-recipe/user-recipe.component';
 import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { RecipeComponent } from './recipes/recipe/recipe.component';
@@ -26,7 +27,10 @@ const appRoutes: Routes = [
 			{ path: ':id', component: RecipeComponent }
 		] },
 		{ path: 'add-recipe', component: AddRecipeComponent },
-		{ path: 'user-recipes', component: UserRecipesComponent },
+		{ path: 'user-recipes', children: [
+			{ path: '', component: UserRecipesComponent },
+			{ path: ':id', component: UserRecipeComponent }
+		] },
 		{ path: 'settings', component: SettingsComponent }
 	] }
 ];
