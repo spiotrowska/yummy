@@ -11,15 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipesComponent implements OnInit {
 	protected recipes: RecipeModel[];
-	protected recipeUrl: string;
 
-	constructor(
-		private recipesService: RecipesService,
-		private authUserService: AuthUserService) { }
+	constructor(private recipesService: RecipesService) { }
 
 	ngOnInit() {
 		this.getRecipes();
-		this.setRecipeUrl();
 	}
 
 	private getRecipes() {
@@ -28,14 +24,6 @@ export class RecipesComponent implements OnInit {
 				this.recipes = recipes;
 			}
 		);
-	}
-
-	private setRecipeUrl() {
-		if (this.authUserService.isUserLogged) {
-			this.recipeUrl = 'private/recipes';
-		} else {
-			this.recipeUrl = 'dashboard';
-		}
 	}
 
 }

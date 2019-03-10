@@ -1,3 +1,5 @@
+import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserRecipeComponent } from './recipes/user-recipe/user-recipe.component';
 import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
@@ -15,7 +17,7 @@ const appRoutes: Routes = [
 	{ path: '', component: PublicComponent, children: [
 		{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 		{ path: 'dashboard', children: [
-			{ path: '', component: RecipesComponent },
+			{ path: '', component: DashboardComponent },
 			{ path: ':id', component: RecipeComponent }
 		] },
 		{ path: 'login', component: LoginComponent } ]
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
 		{ path: 'add-recipe', component: AddRecipeComponent },
 		{ path: 'user-recipes', children: [
 			{ path: '', component: UserRecipesComponent },
-			{ path: ':id', component: UserRecipeComponent }
+			{ path: ':id', component: UserRecipeComponent },
+			{ path: ':id/edit', component: EditRecipeComponent }
 		] },
 		{ path: 'settings', component: SettingsComponent }
 	] }

@@ -1,7 +1,7 @@
 import { RecipeIngredientModel } from './recipe-ingredient.model';
 import { RecipeRatingModel } from './recipe-rating.model';
 
-export class RecipeModel {
+export interface RecipeModel {
 	id: string;
 	name: string;
 	summary: string;

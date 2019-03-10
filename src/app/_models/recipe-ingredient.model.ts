@@ -1,6 +1,6 @@
 import { UnitEnum } from './unit.enum';
 
-export class RecipeIngredientModel {
+export interface RecipeIngredientModel {
 	ingredientId: string;
 	ingredientName: string;
 	quantity: number;

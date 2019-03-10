@@ -23,6 +23,8 @@ import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { UserRecipesComponent } from './recipes/user-recipes/user-recipes.component';
 import { RecipesListViewComponent } from './shared/recipes-list-view/recipes-list-view.component';
 import { UserRecipeComponent } from './recipes/user-recipe/user-recipe.component';
+import { RecipeFormComponent } from './shared/recipe-form/recipe-form.component';
+import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 
 @NgModule({
 	declarations: [
@@ -39,7 +41,9 @@ import { UserRecipeComponent } from './recipes/user-recipe/user-recipe.component
 		AddRecipeComponent,
 		UserRecipesComponent,
 		RecipesListViewComponent,
-		UserRecipeComponent
+		UserRecipeComponent,
+		RecipeFormComponent,
+		EditRecipeComponent
 	],
 	imports: [
 		BrowserModule,

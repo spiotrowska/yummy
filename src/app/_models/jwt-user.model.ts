@@ -1,5 +1,5 @@
-export class JwtUserModel {
-	userId: string;
+export interface JwtUserModel {
+	UserId: string;
 	email: string;
 	firstName: string;
 	lastName: string;

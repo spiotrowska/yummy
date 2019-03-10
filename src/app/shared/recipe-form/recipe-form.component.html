@@ -1,0 +1,55 @@
+<form [formGroup]="recipeForm" class="m-2">
+		<div class="form-group">
+			<input formControlName="name" id="name" class="form-control"/>
+			<label for="name">Nazwa</label>
+		</div>
+		<div class="form-group">
+			<textarea formControlName="summary" id="summary" class="form-control" rows="3"></textarea>
+			<label for="summary">Streszczenie / Opis dania</label>
+		</div>
+
+		<button class="btn btn-info mb-3" (click)="addRecipeIngredient()">Dodaj składnik</button>
+		<div formArrayName="recipeIngredients" *ngFor="let recipeIngredient of recipeIngredientsForm.controls; let i = index">
+			<div class="form-group row" [formGroupName]="i">
+				<div class="col-md-5">
+					<select id="{{ 'ingredient' + i }}" formControlName="ingredientId" class="form-control">
+						<option *ngFor="let ingredient of ingredients" [value]="ingredient.id">{{ingredient.name}}</option>
+					</select>
+					<label attr.for="{{ 'ingredient' + i }}">Składnik</label>
+				</div>
+				<div class="col-md-2">
+					<input id="{{ 'quantity' + i }}" type="number" formControlName="quantity" class="form-control">
+					<label attr.for="{{ 'quantity' + i }}">Ilość</label>
+				</div>
+				<div class="col-md-2">
+					<select id="{{ 'unit' + i }}" formControlName="unit" class="form-control">
+						<option *ngFor="let unit of units" [value]="unit">{{UnitEnum[unit]}}</option>
+					</select>
+					<label attr.for="{{ 'unit' + i }}">Jednostka</label>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-danger" (click)="removeRecipeIngredient(i)">Usuń</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<textarea formControlName="description" id="description" class="form-control" rows="5"></textarea>
+			<label for="description">Sposób przygotowania</label>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-4">
+				<input formControlName="difficultyLevel" id="difficultyLevel" class="form-control"/>
+				<label for="difficultyLevel">Poziom trudności</label>
+			</div>
+			<div class="form-group col-md-4">
+				<input formControlName="preparationTime" type="number" id="preparationTime" class="form-control"/>
+				<label for="preparationTime">Czas przygotowania</label>
+			</div>
+			<div class="form-group col-md-4">
+				<input formControlName="totalKcal" type="number" id="totalKcal" class="form-control"/>
+				<label for="totalKcal">Kaloryczność dania</label>
+			</div>
+		</div>
+		<button type="submit" (click)="onSave()" class="btn btn-success">Zapisz</button>
+	</form>
