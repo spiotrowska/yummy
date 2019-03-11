@@ -29,7 +29,9 @@ export class RecipeFormComponent implements OnInit {
 		this.getUnits();
 		this.getIngredients();
 		this.buildForm();
-		this.setRecipeIngredientsValues();
+		if (this.recipe) {
+			this.setRecipeIngredientsValues();
+		}
 	}
 
 	protected onSave() {
@@ -50,21 +52,21 @@ export class RecipeFormComponent implements OnInit {
 
 	private buildForm() {
 		this.recipeForm = this.fb.group({
-			name: [this.recipe.name, [Validators.required]],
-			summary: [this.recipe.summary, [Validators.required]],
-			description: [this.recipe.description, [Validators.required]],
-			difficultyLevel: [this.recipe.difficultyLevel],
-			preparationTime: [this.recipe.preparationTime],
-			totalKcal: [this.recipe.totalKcal],
+			name: [this.recipe && this.recipe.name || '', [Validators.required]],
+			summary: [this.recipe && this.recipe.summary || '', [Validators.required]],
+			description: [this.recipe && this.recipe.description || '', [Validators.required]],
+			difficultyLevel: [this.recipe && this.recipe.difficultyLevel || ''],
+			preparationTime: [this.recipe && this.recipe.preparationTime || ''],
+			totalKcal: [this.recipe && this.recipe.totalKcal || ''],
 			recipeIngredients: this.fb.array([])
 		});
 	}
 
 	private buildRecipeIngredientForm(ingredientId?: string, quantity?: number, unit?: UnitEnum): FormGroup {
 		return this.fb.group({
-			ingredientId: ingredientId,
-			quantity: quantity,
-			unit: unit
+			ingredientId: ingredientId || '',
+			quantity: quantity || '',
+			unit: unit || ''
 		});
 	}
 

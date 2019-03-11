@@ -1,4 +1,3 @@
-import { UnitEnum } from './../../_models/unit.enum';
 import { RecipeModel } from './../../_models/recipe.model';
 import { RecipesService } from './../../_services/recipes.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,15 +11,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RecipeComponent implements OnInit {
 	protected recipe: RecipeModel;
-	protected UnitEnum = UnitEnum;
 
 	constructor(
 		private recipesService: RecipesService,
 		private activatedRoute: ActivatedRoute) { }
 
 	ngOnInit() {
-		const recipeId = this.getRecipeIdFromUrl();
-		this.getRecipe(recipeId);
+		this.getRecipe(this.getRecipeIdFromUrl());
 	}
 
 	private getRecipe(id: string) {

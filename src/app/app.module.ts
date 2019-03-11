@@ -1,3 +1,4 @@
+import { DeleteRecipeModalComponent } from './recipes/delete-recipe-modal/delete-recipe-modal.component';
 import { NgHttpLoaderModule } from './_helpers/http-loader.module';
 import { AuthGuard } from './_guards/auth.guard';
 import { JwtUserService } from './_services/jwt-user.service';
@@ -25,6 +26,7 @@ import { RecipesListViewComponent } from './shared/recipes-list-view/recipes-lis
 import { UserRecipeComponent } from './recipes/user-recipe/user-recipe.component';
 import { RecipeFormComponent } from './shared/recipe-form/recipe-form.component';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
+import { RecipeDetailsViewComponent } from './shared/recipe-details-view/recipe-details-view.component';
 
 @NgModule({
 	declarations: [
@@ -43,7 +45,9 @@ import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component
 		RecipesListViewComponent,
 		UserRecipeComponent,
 		RecipeFormComponent,
-		EditRecipeComponent
+		EditRecipeComponent,
+		RecipeDetailsViewComponent,
+		DeleteRecipeModalComponent
 	],
 	imports: [
 		BrowserModule,
@@ -59,6 +63,7 @@ import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component
 		JwtUserService,
 		AuthGuard
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	entryComponents: [DeleteRecipeModalComponent]
 })
 export class AppModule { }

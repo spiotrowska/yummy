@@ -1,0 +1,14 @@
+<div class="modal-header">
+	<h4 class="modal-title">Usuń przepis</h4>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+  </div>
+  <div class="modal-body">
+	<p>Czy na pewno chcesz usunąć przepis o nazwie: </p>
+	<p>{{ recipeName }}?</p>
+  </div>
+  <div class="modal-footer">
+	<button type="button" class="btn btn-outline-danger" (click)="deleteRecipe()">Usuń</button>
+	<button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Anuluj</button>
+  </div>

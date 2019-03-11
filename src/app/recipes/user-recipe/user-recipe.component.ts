@@ -1,8 +1,9 @@
+import { DeleteRecipeModalComponent } from './../../recipes/delete-recipe-modal/delete-recipe-modal.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from './../../_services/recipes.service';
-import { UnitEnum } from './../../_models/unit.enum';
 import { RecipeModel } from './../../_models/recipe.model';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-user-recipe',
@@ -12,12 +13,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserRecipeComponent implements OnInit {
 	protected recipe: RecipeModel;
-	protected UnitEnum = UnitEnum;
 
 	constructor(
 		private recipesService: RecipesService,
 		private activatedRoute: ActivatedRoute,
-		private router: Router) { }
+		private router: Router,
+		private modalService: NgbModal) { }
 
 	ngOnInit() {
 		this.getRecipe(this.getRecipeIdFromUrl());
@@ -25,6 +26,17 @@ export class UserRecipeComponent implements OnInit {
 
 	protected redirectToEditRecipe() {
 		this.router.navigate([`private/user-recipes/${this.recipe.id}/edit`]);
+	}
+
+	protected openRecipeDeleteModal() {
+		const modal = this.modalService.open(DeleteRecipeModalComponent);
+		modal.componentInstance.recipeName = this.recipe.name;
+		modal.componentInstance.recipeId = this.recipe.id;
+		modal.result
+			.then(() => {
+				this.router.navigate([`private/user-recipes`]);
+			})
+			.catch(() => {});
 	}
 
 	private getRecipe(id: string) {

@@ -1,44 +1,11 @@
 <div class="p-3">
 		<div class="card" *ngIf="recipe">
-			<div class="row">
-				<div class="col-md-5 m-1">
-					<img src="../../../assets/tort-z-fasoli90270146.jpg" class="img-fluid" alt="">
-					<p>{{recipe.summary}}</p>
-				</div>
-				<div class="col-md-6 m-1">
-					<div class="card-block">
-						<h1>{{recipe.name}}</h1>
-						<h5>Autor: {{recipe.userFullName}}</h5>
-						<i class="fa fa-clock-o mr-3"> {{recipe.preparationTime}} min.</i>
-						<i class="fa fa-signal mr-3"> {{recipe.difficultyLevel}}/5</i>
-						<span class="mr-3"><img src="../../../assets/icon-kcal.svg" class="kcal-img"> {{recipe.totalKcal}} kcal</span>
-
-						<ng-template #t let-fill="fill">
-							<span class="star" [class.full]="fill === 100">
-							  <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
-							</span>
-						</ng-template>
-						<ngb-rating [rate]="recipe.averageRate" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating> {{recipe.averageRate}}
-
-						<br><br>
-						<h5>Składniki:</h5>
-						<ul>
-							<li *ngFor="let recipeIngredient of recipe.recipeIngredients">
-								<div class="row">
-									<div class="col-md-6">{{recipeIngredient.ingredientName}}</div>
-									<div class="col-md-4">
-										{{recipeIngredient.quantity}} {{UnitEnum[recipeIngredient.unitName]}}
-									</div>
-								</div>
-							</li>
-						</ul>
-						<h5>Sposób przygotowania:</h5>
-						<p>{{recipe.description}}</p>
-					</div>
+			<div class="row m-auto p-2">
+				<div class="col">
+					<button class="btn btn-success m-1" (click)="redirectToEditRecipe()">Edytuj</button>
+					<button class="btn btn-danger m-1" (click)="openRecipeDeleteModal()">Usuń</button>
 				</div>
 			</div>
-			<div class="row">
-				<button class="btn btn-success" (click)="redirectToEditRecipe()">Edytuj</button>
-			</div>
+			<app-recipe-details-view [recipe]="recipe"></app-recipe-details-view>
 		</div>
 	</div>

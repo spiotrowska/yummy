@@ -28,4 +28,8 @@ export class RecipesService {
 	updateRecipe(recipe: RecipeModel, recipeId: string): Observable<RecipeModel> {
 		return this.http.put<RecipeModel>(`recipes/${recipeId}`, recipe);
 	}
+
+	deleteRecipe(id: string): Observable<RecipeModel> {
+		return this.http.delete<RecipeModel>(`recipes/${id}`);
+	}
 }
