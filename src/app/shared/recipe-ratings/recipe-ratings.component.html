@@ -5,7 +5,6 @@
 	<div class="col-md-7 m-auto" *ngIf="!recipeRatings?.length">
 		<div class="card col-md-12">
 			<p class="m-3">Brak komentarzy.</p>
-			<p *ngIf="isOnDashboard" class="m-3 mt-0">Zaloguj się, aby dodać komentarz!</p>
 		</div>
 	</div>
 	<div class="col-md-7 m-auto" *ngFor="let recipeRating of recipeRatings; let i = index">
@@ -14,5 +13,10 @@
 	<div class="col-md-7 m-auto" *ngIf="!isOnDashboard">
 		<h5 class="text-center mt-3">Dodaj ocenę i komentarz</h5>
 		<app-add-recipe-rating-form [recipeId]="recipeId" (recipeRatingEmitter)="recipeRatings.push($event)"></app-add-recipe-rating-form>
+	</div>
+	<div class="col-md-7 m-auto" *ngIf="isOnDashboard">
+		<div class="card col-md-12">
+			<p class="m-3 mt-0">Zaloguj się, aby dodać komentarz!</p>
+		</div>
 	</div>
 </div>

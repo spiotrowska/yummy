@@ -25,7 +25,7 @@ export class RecipeRatingFormComponent implements OnInit {
 		private fb: FormBuilder) { }
 
 	ngOnInit() {
-		this.currentUserId = this.jwtUserService.currentUser.UserId;
+		this.currentUserId = this.jwtUserService.currentUser ? this.jwtUserService.currentUser.UserId : null;
 		this.recipeRatingFirstValue = this.recipeRating.rate;
 		this.buildForm();
 	}
