@@ -1,0 +1,14 @@
+<div class="row mb-4">
+	<p class="col-12">
+		<ngb-rating [(rate)]="recipeRate" max="5" (hover)="recipeRatingHovered = $event"
+			(leave)="recipeRatingHovered = recipeRate"></ngb-rating>
+			{{ recipeRatingHovered || recipeRate }}
+	</p>
+	<form [formGroup]="commentForm" class="col-12">
+		<div class="form-group">
+			<label for="comment">Komentarz</label>
+			<textarea formControlName="comment" id="comment" class="form-control" rows="3"></textarea>
+		</div>
+	</form>
+	<button class="btn btn-success" (click)="createRecipeRating()">Zapisz</button>
+</div>

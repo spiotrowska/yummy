@@ -29,7 +29,7 @@ export class UserRecipeComponent implements OnInit {
 	}
 
 	protected openRecipeDeleteModal() {
-		const modal = this.modalService.open(DeleteRecipeModalComponent);
+		const modal = this.modalService.open(DeleteRecipeModalComponent, { backdrop: 'static' });
 		modal.componentInstance.recipeName = this.recipe.name;
 		modal.componentInstance.recipeId = this.recipe.id;
 		modal.result

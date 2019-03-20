@@ -1,0 +1,23 @@
+<div class="row mb-4">
+	<form [formGroup]="recipeRatingForm" class="col-12 row p-0">
+		<p class="col-md-6 mb-0">
+			<ngb-rating [(rate)]="recipeRating.rate" formControlName="rate" [readonly]="!isInUpdateMode" max="5"
+			(hover)="recipeRatingHovered = $event" (leave)="recipeRatingHovered = recipeRating.rate"></ngb-rating>
+			{{ isInUpdateMode ? recipeRatingHovered || recipeRatingFirstValue : recipeRating.rate }}
+		</p>
+		<p class="col-md-6 text-right mb-0">{{ recipeRating.userFullName }}</p>
+		<div class="form-group col-12">
+			<textarea formControlName="comment" class="form-control" [readOnly]="!isInUpdateMode" rows="3"></textarea>
+		</div>
+	</form>
+	<div class="ml-auto" *ngIf="currentUserId === recipeRating.userId">
+		<div *ngIf="!isInUpdateMode; else updatingButtons">
+			<button class="btn btn-link pt-0" (click)="isInUpdateMode = !isInUpdateMode">Edytuj</button>
+			<button class="btn btn-link pt-0" (click)="deleteRecipeRating()">Usuń</button>
+		</div>
+		<ng-template #updatingButtons>
+			<button class="btn btn-link pt-0" (click)="updateRecipeRating()">Zapisz</button>
+			<button class="btn btn-link pt-0" (click)="cancelUpdateMode()">Anuluj</button>
+		</ng-template>
+	</div>
+</div>

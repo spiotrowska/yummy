@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipesComponent } from './recipes/recipes.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardRecipesComponent } from './dashboard-recipes/dashboard-recipes.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -27,13 +27,17 @@ import { UserRecipeComponent } from './recipes/user-recipe/user-recipe.component
 import { RecipeFormComponent } from './shared/recipe-form/recipe-form.component';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { RecipeDetailsViewComponent } from './shared/recipe-details-view/recipe-details-view.component';
+import { RecipeRatingsComponent } from './shared/recipe-ratings/recipe-ratings.component';
+import { RecipeRatingFormComponent } from './shared/recipe-ratings/recipe-rating-form/recipe-rating-form.component';
+import { AddRecipeRatingFormComponent } from './shared/recipe-ratings/add-recipe-rating-form/add-recipe-rating-form.component';
+import { DashboardRecipeComponent } from './dashboard-recipe/dashboard-recipe.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
 		RecipesComponent,
-		DashboardComponent,
+		DashboardRecipesComponent,
 		HeaderComponent,
 		FooterComponent,
 		PublicComponent,
@@ -47,7 +51,11 @@ import { RecipeDetailsViewComponent } from './shared/recipe-details-view/recipe-
 		RecipeFormComponent,
 		EditRecipeComponent,
 		RecipeDetailsViewComponent,
-		DeleteRecipeModalComponent
+		DeleteRecipeModalComponent,
+		RecipeRatingsComponent,
+		RecipeRatingFormComponent,
+		AddRecipeRatingFormComponent,
+		DashboardRecipeComponent
 	],
 	imports: [
 		BrowserModule,

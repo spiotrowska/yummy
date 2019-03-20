@@ -3,12 +3,12 @@ import { RecipeModel } from '../_models/recipe.model';
 import { RecipesService } from '../_services/recipes.service';
 
 @Component({
-	selector: 'app-dashboard',
-	templateUrl: './dashboard.component.html',
-	styleUrls: ['./dashboard.component.less'],
+	selector: 'app-dashboard-recipes',
+	templateUrl: './dashboard-recipes.component.html',
+	styleUrls: ['./dashboard-recipes.component.less'],
 	providers: [RecipesService]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardRecipesComponent implements OnInit {
 	protected recipes: RecipeModel[];
 
 	constructor(private recipesService: RecipesService) { }
