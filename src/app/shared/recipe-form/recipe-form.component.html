@@ -51,5 +51,22 @@
 				<label for="totalKcal">Kaloryczność dania</label>
 			</div>
 		</div>
-		<button type="submit" (click)="onSave()" class="btn btn-success">Zapisz</button>
 	</form>
+
+	<form [formGroup]="recipeImagesForm">
+		<div ngbRadioGroup formControlName="photoDefaultIndex">
+			<file-drop (onFileDrop)="dropped($event)" [showBrowseBtn]="true">
+				<span>Przeciągnij zdjęcia tutaj</span>
+			</file-drop>
+			<label ngbButtonLabel *ngFor="let photo of photos; let i = index">
+				<input ngbButton type="radio" [value]="i">
+				<app-recipe-photo-preview [photo]="photo.file" (deleteEmitter)="photos.splice(i, 1)"></app-recipe-photo-preview>
+			</label>
+			<label ngbButtonLabel *ngFor="let url of recipe?.recipeImages; let i = index">
+				<input ngbButton type="radio" [value]="i">
+				<app-recipe-photo-preview [photoUrl]="url" (deleteEmitter)="recipe.recipeImages.splice(i, 1)"></app-recipe-photo-preview>
+			</label>
+		</div>
+	</form>
+	<br>
+	<button type="submit" (click)="onSave()" class="btn btn-success">Zapisz</button>

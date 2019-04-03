@@ -4,7 +4,10 @@
 			<div class="col-md-8 m-auto">
 				<h4 class="text-center m-3">Dodaj przepis</h4><br>
 
-				<app-recipe-form (recipeEmitter)="createRecipe($event)"></app-recipe-form>
+				<app-recipe-form
+					(recipeEmitter)="createRecipe($event)"
+					(photosEmitter)="recipeImages = $event">
+				</app-recipe-form>
 
 			</div>
 		</div>

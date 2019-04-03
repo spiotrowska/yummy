@@ -31,6 +31,8 @@ import { RecipeRatingsComponent } from './shared/recipe-ratings/recipe-ratings.c
 import { RecipeRatingFormComponent } from './shared/recipe-ratings/recipe-rating-form/recipe-rating-form.component';
 import { AddRecipeRatingFormComponent } from './shared/recipe-ratings/add-recipe-rating-form/add-recipe-rating-form.component';
 import { DashboardRecipeComponent } from './dashboard-recipe/dashboard-recipe.component';
+import { FileDropModule } from 'ngx-file-drop';
+import { RecipePhotoPreviewComponent } from './shared/recipe-form/recipe-photo-preview/recipe-photo-preview.component';
 
 @NgModule({
 	declarations: [
@@ -55,7 +57,8 @@ import { DashboardRecipeComponent } from './dashboard-recipe/dashboard-recipe.co
 		RecipeRatingsComponent,
 		RecipeRatingFormComponent,
 		AddRecipeRatingFormComponent,
-		DashboardRecipeComponent
+		DashboardRecipeComponent,
+		RecipePhotoPreviewComponent
 	],
 	imports: [
 		BrowserModule,
@@ -64,7 +67,8 @@ import { DashboardRecipeComponent } from './dashboard-recipe/dashboard-recipe.co
 		HttpClientModule,
 		NgHttpLoaderModule,
 		NgbModule.forRoot(),
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		FileDropModule
 	],
 	providers: [
 		AuthUserService,

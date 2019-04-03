@@ -12,7 +12,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class RecipeRatingFormComponent implements OnInit {
 	@Input() recipeRating: RecipeRatingModel;
-	@Output() deleteEmitter: EventEmitter<string> = new EventEmitter<string>();
+	@Output() deleteEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 	protected currentUserId: string;
 	protected isInUpdateMode = false;
 	protected recipeRatingHovered: number;
@@ -45,7 +45,7 @@ export class RecipeRatingFormComponent implements OnInit {
 		this.recipeRatingsService.deleteRecipeRating(this.recipeRating.id).subscribe(
 			() => {
 				// TODO notification
-				this.deleteEmitter.emit('Deleted');
+				this.deleteEmitter.emit(true);
 			}
 		);
 	}

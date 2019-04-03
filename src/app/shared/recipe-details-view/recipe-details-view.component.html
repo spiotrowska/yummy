@@ -1,9 +1,5 @@
 <div class="row">
-	<div class="col-md-5 m-1">
-		<img src="../../../assets/tort-z-fasoli90270146.jpg" class="img-fluid" alt="">
-		<p>{{recipe.summary}}</p>
-	</div>
-	<div class="col-md-6 m-1">
+	<div class="col-md-7 m-auto">
 		<div class="card-block">
 			<h1>{{recipe.name}}</h1>
 			<h5>Autor: {{recipe.userFullName}}</h5>
@@ -17,6 +13,16 @@
 				</span>
 			</ng-template>
 			<ngb-rating [rate]="recipe.averageRate" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating> {{recipe.averageRate}}
+
+			<p>{{recipe.summary}}</p>
+
+			<div class="col-10 m-auto">
+				<ngb-carousel showNavigationArrows="true" showNavigationIndicators="true" interval="0">
+					<ng-template ngbSlide *ngFor="let imageUrl of recipeImagesUrls">
+						<img [src]="imageUrl" alt="Photo" class="img-fluid">
+					</ng-template>
+				</ngb-carousel>
+			</div>
 
 			<br><br>
 			<h5>Składniki:</h5>

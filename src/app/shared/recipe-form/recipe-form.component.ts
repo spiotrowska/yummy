@@ -1,10 +1,12 @@
+import { RecipeImageModel } from './../../_models/recipe-image.model';
 import { RecipeModel } from './../../_models/recipe.model';
 import { IngredientsService } from './../../_services/ingredients.service';
 import { UnitsService } from './../../_services/units.service';
 import { IngredientModel } from './../../_models/ingredient.model';
 import { UnitEnum } from './../../_models/unit.enum';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { UploadEvent, UploadFile, FileSystemFileEntry } from 'ngx-file-drop';
 
 @Component({
 	selector: 'app-recipe-form',
@@ -15,10 +17,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class RecipeFormComponent implements OnInit {
 	@Input() recipe: RecipeModel;
 	@Output() recipeEmitter: EventEmitter<RecipeModel> = new EventEmitter<RecipeModel>();
+	@Output() photosEmitter: EventEmitter<RecipeImageModel[]> = new EventEmitter<RecipeImageModel[]>();
 	protected recipeForm: FormGroup;
+	protected recipeImagesForm: FormGroup;
 	protected UnitEnum = UnitEnum;
 	protected units: UnitEnum;
 	protected ingredients: IngredientModel[];
+	protected photos: { file: UploadFile, isDefault: boolean }[] = [];
 
 	constructor(
 		private fb: FormBuilder,
@@ -36,17 +41,24 @@ export class RecipeFormComponent implements OnInit {
 
 	protected onSave() {
 		this.recipeEmitter.emit(this.recipeForm.value);
+		this.emitRecipeImages();
+	}
+
+	protected dropped(event: UploadEvent) {
+		event.files.forEach((file) => {
+			this.photos.push({ file: file, isDefault: false });
+		});
 	}
 
 	protected get recipeIngredientsForm(): FormArray {
 		return <FormArray>this.recipeForm.get('recipeIngredients');
 	}
 
-	protected addRecipeIngredient(): void {
+	protected addRecipeIngredient() {
 		this.recipeIngredientsForm.push(this.buildRecipeIngredientForm());
 	}
 
-	protected removeRecipeIngredient(i: number): void {
+	protected removeRecipeIngredient(i: number) {
 		this.recipeIngredientsForm.removeAt(i);
 	}
 
@@ -59,6 +71,9 @@ export class RecipeFormComponent implements OnInit {
 			preparationTime: [this.recipe && this.recipe.preparationTime || ''],
 			totalKcal: [this.recipe && this.recipe.totalKcal || ''],
 			recipeIngredients: this.fb.array([])
+		});
+		this.recipeImagesForm = this.fb.group({
+			photoDefaultIndex: ''
 		});
 	}
 
@@ -94,6 +109,29 @@ export class RecipeFormComponent implements OnInit {
 				this.ingredients = ingredients;
 			}
 		);
+	}
+
+	private emitRecipeImages() {
+		const recipeImages: RecipeImageModel[] = [];
+		this.photos.forEach((photo, index) => {
+			const fileEntry = photo.file.fileEntry as FileSystemFileEntry;
+			fileEntry.file((file: File) => {
+				const reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = () => {
+					recipeImages.push({
+						content: reader.result.toString().replace(/^data:(.*;base64,)?/, ''),
+						isDefault: this.isImageDefault(index),
+						contentType: reader.result.toString().match(/data:(.*);/)[1]
+					});
+				};
+			});
+		});
+		this.photosEmitter.emit(recipeImages);
+	}
+
+	private isImageDefault(index: number): boolean {
+		return index === this.recipeImagesForm.value['photoDefaultIndex'];
 	}
 
 }
