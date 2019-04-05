@@ -1,3 +1,4 @@
+import { NotificationOptions } from './_helpers/notification.options';
 import { DeleteRecipeModalComponent } from './recipes/delete-recipe-modal/delete-recipe-modal.component';
 import { NgHttpLoaderModule } from './_helpers/http-loader.module';
 import { AuthGuard } from './_guards/auth.guard';
@@ -33,6 +34,7 @@ import { AddRecipeRatingFormComponent } from './shared/recipe-ratings/add-recipe
 import { DashboardRecipeComponent } from './dashboard-recipe/dashboard-recipe.component';
 import { FileDropModule } from 'ngx-file-drop';
 import { RecipePhotoPreviewComponent } from './shared/recipe-form/recipe-photo-preview/recipe-photo-preview.component';
+import { NotifierModule } from 'angular-notifier';
 
 @NgModule({
 	declarations: [
@@ -68,7 +70,8 @@ import { RecipePhotoPreviewComponent } from './shared/recipe-form/recipe-photo-p
 		NgHttpLoaderModule,
 		NgbModule.forRoot(),
 		ReactiveFormsModule,
-		FileDropModule
+		FileDropModule,
+		NotifierModule.withConfig(NotificationOptions)
 	],
 	providers: [
 		AuthUserService,

@@ -1,3 +1,5 @@
+import { NotifierService } from 'angular-notifier';
+import { NotificationTypeEnum } from './../../_models/notification-type.enum';
 import { RecipeImageModel } from './../../_models/recipe-image.model';
 import { RecipeImagesService } from './../../_services/recipe-images.service';
 import { CreateRecipeImagesModel } from './../../_models/create-recipe-images.model';
@@ -21,7 +23,9 @@ export class EditRecipeComponent implements OnInit {
 		private recipesService: RecipesService,
 		private recipeImagesService: RecipeImagesService,
 		private router: Router,
-		private activatedRoute: ActivatedRoute) { }
+		private activatedRoute: ActivatedRoute,
+		private notificationService: NotifierService) {
+		}
 
 	ngOnInit() {
 		this.getRecipe(this.getRecipeIdFromUrl());
@@ -36,6 +40,7 @@ export class EditRecipeComponent implements OnInit {
 				if (this.deleteRecipeImagesIds.length) {
 					this.deleteRecipeImages();
 				}
+				this.notificationService.notify(NotificationTypeEnum.Success, 'Edytowano przepis!');
 				this.router.navigate(['private/user-recipes']);
 			}
 		);

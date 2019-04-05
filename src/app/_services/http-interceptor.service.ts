@@ -1,3 +1,5 @@
+import { NotifierService } from 'angular-notifier';
+import { NotificationTypeEnum } from './../_models/notification-type.enum';
 import { environment } from './../../environments/environment';
 import { AuthUserService } from './auth-user.service';
 import { Injectable } from '@angular/core';
@@ -10,7 +12,9 @@ import 'rxjs/add/operator/finally';
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
-	constructor(private authUserService: AuthUserService) {
+	constructor(
+		private authUserService: AuthUserService,
+		private notificationService: NotifierService) {
 	}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -38,13 +42,13 @@ export class HttpInterceptorService implements HttpInterceptor {
 	}
 
 	private handleError(error) {
-		console.log(error);
-		// TODO
+		this.notificationService.notify(NotificationTypeEnum.Error, 'Wystąpił błąd!');
 	}
 }
 
-export function HttpInterceptorServiceFactory(authUserService: AuthUserService) {
-	return new HttpInterceptorService(authUserService);
+export function HttpInterceptorServiceFactory(authUserService: AuthUserService,
+		notificationService: NotifierService) {
+	return new HttpInterceptorService(authUserService, notificationService);
 }
 
 export let HttpInterceptorServiceFactoryProvider = {

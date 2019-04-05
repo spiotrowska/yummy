@@ -1,3 +1,5 @@
+import { NotifierService } from 'angular-notifier';
+import { NotificationTypeEnum } from './../../../_models/notification-type.enum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecipeRatingModel } from './../../../_models/recipe-rating.model';
 import { CreateRecipeRatingModel } from './../../../_models/create-recipe-rating.model';
@@ -19,7 +21,8 @@ export class AddRecipeRatingFormComponent implements OnInit {
 
 	constructor(
 		private recipeRatingsService: RecipeRatingsService,
-		private fb: FormBuilder) { }
+		private fb: FormBuilder,
+		private notificationService: NotifierService) { }
 
 	ngOnInit() {
 		this.buildCommentForm();
@@ -35,6 +38,7 @@ export class AddRecipeRatingFormComponent implements OnInit {
 			(recipeRating) => {
 				this.recipeRatingEmitter.emit(recipeRating);
 				this.clearControls();
+				this.notificationService.notify(NotificationTypeEnum.Success, 'Dodano ocenę!');
 			}
 		);
 	}

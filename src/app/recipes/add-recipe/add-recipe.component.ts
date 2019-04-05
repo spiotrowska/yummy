@@ -1,3 +1,5 @@
+import { NotifierService } from 'angular-notifier';
+import { NotificationTypeEnum } from './../../_models/notification-type.enum';
 import { RecipeImagesService } from './../../_services/recipe-images.service';
 import { CreateRecipeImagesModel } from './../../_models/create-recipe-images.model';
 import { RecipeImageModel } from './../../_models/recipe-image.model';
@@ -18,7 +20,8 @@ export class AddRecipeComponent implements OnInit {
 	constructor(
 		private recipesService: RecipesService,
 		private recipeImagesService: RecipeImagesService,
-		private router: Router) { }
+		private router: Router,
+		private notificationService: NotifierService) { }
 
 	ngOnInit() {
 	}
@@ -27,6 +30,8 @@ export class AddRecipeComponent implements OnInit {
 		this.recipesService.createRecipe(recipe).subscribe(
 			(data: RecipeModel) => {
 				this.createRecipeImages(data.id);
+				this.notificationService.notify(NotificationTypeEnum.Success, 'Dodano przepis!');
+				this.router.navigate(['private/user-recipes']);
 			}
 		);
 	}
@@ -34,11 +39,7 @@ export class AddRecipeComponent implements OnInit {
 	protected createRecipeImages(recipeId: string) {
 		const createRecipeImages: CreateRecipeImagesModel = {
 			recipeId: recipeId, recipeImages: this.recipeImages };
-		this.recipeImagesService.createRecipeImages(createRecipeImages).subscribe(
-			() => {
-				this.router.navigate(['private/user-recipes']);
-			}
-		);
+		this.recipeImagesService.createRecipeImages(createRecipeImages).subscribe(() => {});
 	}
 
 }
