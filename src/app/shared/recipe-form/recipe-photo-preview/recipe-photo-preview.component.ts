@@ -9,9 +9,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class RecipePhotoPreviewComponent implements OnInit {
 	@Input() photo: UploadFile;
-	@Input() photoUrl: string;
+	@Input() photoId: string;
 	@Output() deleteEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 	protected photoPreview: string | ArrayBuffer;
+	protected photoUrl: string;
 
 	constructor() { }
 
@@ -19,7 +20,7 @@ export class RecipePhotoPreviewComponent implements OnInit {
 		if (this.photo) {
 			this.readFile();
 		} else {
-			this.photoUrl = `${environment.apiUrl}recipesImages/${this.photoUrl}`;
+			this.photoUrl = `${environment.apiUrl}recipesImages/${this.photoId}`;
 		}
 	}
 

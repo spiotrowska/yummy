@@ -62,9 +62,10 @@
 				<input ngbButton type="radio" [value]="i">
 				<app-recipe-photo-preview [photo]="photo.file" (deleteEmitter)="photos.splice(i, 1)"></app-recipe-photo-preview>
 			</label>
-			<label ngbButtonLabel *ngFor="let url of recipe?.recipeImages; let i = index">
+			<label ngbButtonLabel *ngFor="let recipeImage of recipe?.recipeImages; let i = index">
 				<input ngbButton type="radio" [value]="i">
-				<app-recipe-photo-preview [photoUrl]="url" (deleteEmitter)="recipe.recipeImages.splice(i, 1)"></app-recipe-photo-preview>
+				<app-recipe-photo-preview [photoId]="recipeImage.id"
+					(deleteEmitter)="addToDeletedImageIds(i, recipeImage.id)"></app-recipe-photo-preview>
 			</label>
 		</div>
 	</form>

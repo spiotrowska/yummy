@@ -22,7 +22,7 @@ export class RecipeDetailsViewComponent implements OnInit {
 	private setRecipeImagesUrls() {
 		if (this.recipe) {
 			this.recipeImagesUrls = this.recipe.recipeImages.map(
-				(recipeImageId: string) => `${environment.apiUrl}recipesImages/${recipeImageId}`
+				(recipeImage: { id: string, isDefault: boolean }) => `${environment.apiUrl}recipesImages/${recipeImage.id}`
 			);
 		}
 	}

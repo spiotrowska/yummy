@@ -18,12 +18,14 @@ export class RecipeFormComponent implements OnInit {
 	@Input() recipe: RecipeModel;
 	@Output() recipeEmitter: EventEmitter<RecipeModel> = new EventEmitter<RecipeModel>();
 	@Output() photosEmitter: EventEmitter<RecipeImageModel[]> = new EventEmitter<RecipeImageModel[]>();
+	@Output() deletedPhotoIdsEmitter: EventEmitter<string[]> = new EventEmitter<string[]>();
 	protected recipeForm: FormGroup;
 	protected recipeImagesForm: FormGroup;
 	protected UnitEnum = UnitEnum;
 	protected units: UnitEnum;
 	protected ingredients: IngredientModel[];
 	protected photos: { file: UploadFile, isDefault: boolean }[] = [];
+	private deletedPhotoIds: string[] = [];
 
 	constructor(
 		private fb: FormBuilder,
@@ -42,6 +44,7 @@ export class RecipeFormComponent implements OnInit {
 	protected onSave() {
 		this.recipeEmitter.emit(this.recipeForm.value);
 		this.emitRecipeImages();
+		this.deletedPhotoIdsEmitter.emit(this.deletedPhotoIds);
 	}
 
 	protected dropped(event: UploadEvent) {
@@ -60,6 +63,11 @@ export class RecipeFormComponent implements OnInit {
 
 	protected removeRecipeIngredient(i: number) {
 		this.recipeIngredientsForm.removeAt(i);
+	}
+
+	protected addToDeletedImageIds(index: number, id: string) {
+		this.recipe.recipeImages.splice(index, 1);
+		this.deletedPhotoIds.push(id);
 	}
 
 	private buildForm() {

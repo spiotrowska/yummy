@@ -14,5 +14,5 @@ export interface RecipeModel {
 	totalKcal: number;
 	averageRate: number;
 	recipesRatings: RecipeRatingModel[];
-	recipeImages: string[];
+	recipeImages: { id: string, isDefault: boolean }[];
 }

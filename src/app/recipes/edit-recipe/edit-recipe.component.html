@@ -4,7 +4,8 @@
 			<div class="col-md-8 m-auto">
 				<h4 class="text-center m-3">Edytuj przepis</h4><br>
 				<app-recipe-form *ngIf="recipe" [recipe]="recipe" (recipeEmitter)="updateRecipe($event)"
-					(photosEmitter)="recipeImages = $event"></app-recipe-form>
+					(photosEmitter)="recipeImages = $event"
+					(deletedPhotoIdsEmitter)="deleteRecipeImagesIds = $event"></app-recipe-form>
 			</div>
 		</div>
 	</div>

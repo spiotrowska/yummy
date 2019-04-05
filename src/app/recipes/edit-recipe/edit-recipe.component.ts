@@ -15,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
 export class EditRecipeComponent implements OnInit {
 	protected recipe: RecipeModel;
 	protected recipeImages: RecipeImageModel[];
+	protected deleteRecipeImagesIds: string[];
 
 	constructor(
 		private recipesService: RecipesService,
@@ -29,7 +30,13 @@ export class EditRecipeComponent implements OnInit {
 	protected updateRecipe(recipe: RecipeModel) {
 		this.recipesService.updateRecipe(recipe, this.recipe.id).subscribe(
 			() => {
-				this.createRecipeImages();
+				if (this.recipeImages.length) {
+					this.createRecipeImages();
+				}
+				if (this.deleteRecipeImagesIds.length) {
+					this.deleteRecipeImages();
+				}
+				this.router.navigate(['private/user-recipes']);
 			}
 		);
 	}
@@ -38,10 +45,12 @@ export class EditRecipeComponent implements OnInit {
 		const createRecipeImages: CreateRecipeImagesModel = {
 			recipeId: this.recipe.id, recipeImages: this.recipeImages };
 		this.recipeImagesService.createRecipeImages(createRecipeImages).subscribe(
-			() => {
-				this.router.navigate(['private/user-recipes']);
-			}
-		);
+			() => {});
+	}
+
+	private deleteRecipeImages() {
+		this.recipeImagesService.deleteRecipeImages(this.deleteRecipeImagesIds).subscribe(
+			() => {});
 	}
 
 	private getRecipe(id: string) {
