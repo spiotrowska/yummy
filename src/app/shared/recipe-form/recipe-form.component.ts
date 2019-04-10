@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 import { RecipeImageModel } from './../../_models/recipe-image.model';
 import { RecipeModel } from './../../_models/recipe.model';
 import { IngredientsService } from './../../_services/ingredients.service';
@@ -5,7 +7,7 @@ import { UnitsService } from './../../_services/units.service';
 import { IngredientModel } from './../../_models/ingredient.model';
 import { UnitEnum } from './../../_models/unit.enum';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UploadEvent, UploadFile, FileSystemFileEntry } from 'ngx-file-drop';
 
 @Component({
@@ -34,7 +36,6 @@ export class RecipeFormComponent implements OnInit {
 
 	ngOnInit() {
 		this.getUnits();
-		this.getIngredients();
 		this.buildForm();
 		if (this.recipe) {
 			this.setRecipeIngredientsValues();
@@ -42,7 +43,7 @@ export class RecipeFormComponent implements OnInit {
 	}
 
 	protected onSave() {
-		this.recipeEmitter.emit(this.recipeForm.value);
+		this.emitRecipe();
 		this.emitRecipeImages();
 		this.deletedPhotoIdsEmitter.emit(this.deletedPhotoIds);
 	}
@@ -70,6 +71,11 @@ export class RecipeFormComponent implements OnInit {
 		this.deletedPhotoIds.push(id);
 	}
 
+	protected search = (phrase$: Observable<string>) =>
+		phrase$.switchMap(term => this.ingredientsService.getIngredientsSearcher(term))
+
+	protected formatter = (ingredient: {name: string}) => ingredient.name;
+
 	private buildForm() {
 		this.recipeForm = this.fb.group({
 			name: [this.recipe && this.recipe.name || '', [Validators.required]],
@@ -85,9 +91,9 @@ export class RecipeFormComponent implements OnInit {
 		});
 	}
 
-	private buildRecipeIngredientForm(ingredientId?: string, quantity?: number, unit?: UnitEnum): FormGroup {
+	private buildRecipeIngredientForm(ingredientId?: string, ingredientName?: string, quantity?: number, unit?: UnitEnum): FormGroup {
 		return this.fb.group({
-			ingredientId: ingredientId || '',
+			ingredientId: { id: ingredientId, name: ingredientName } || '',
 			quantity: quantity || '',
 			unit: unit || ''
 		});
@@ -97,6 +103,7 @@ export class RecipeFormComponent implements OnInit {
 		this.recipe.recipeIngredients.forEach(recipeIngredient => {
 			this.recipeIngredientsForm.push(this.buildRecipeIngredientForm(
 				recipeIngredient.ingredientId,
+				recipeIngredient.ingredientName,
 				recipeIngredient.quantity,
 				recipeIngredient.unitName
 			));
@@ -111,12 +118,14 @@ export class RecipeFormComponent implements OnInit {
 		);
 	}
 
-	private getIngredients() {
-		this.ingredientsService.getIngredients().subscribe(
-			(ingredients: IngredientModel[]) => {
-				this.ingredients = ingredients;
-			}
-		);
+	private emitRecipe() {
+		this.recipeForm.value.recipeIngredients = this.recipeForm.value.recipeIngredients
+			.map(ingredient => ({
+				ingredientId: ingredient.ingredientId.id,
+				quantity: ingredient.quantity,
+				unit: ingredient.unit
+			}));
+		this.recipeEmitter.emit(this.recipeForm.value);
 	}
 
 	private emitRecipeImages() {

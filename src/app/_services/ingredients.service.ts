@@ -1,7 +1,9 @@
+import { IngredientModel } from './../_models/ingredient.model';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IngredientModel } from '../_models/ingredient.model';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class IngredientsService {
@@ -11,5 +13,10 @@ export class IngredientsService {
 
 	getIngredients(): Observable<IngredientModel[]> {
 		return this.http.get<IngredientModel[]>('ingredients');
+	}
+
+	getIngredientsSearcher(phrase: string): Observable<IngredientModel[]> {
+		return this.http.get<IngredientModel[]>('ingredients/searcher', { params: { phrase: phrase }})
+			.map(response => response);
 	}
 }

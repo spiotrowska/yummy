@@ -1,9 +1,4 @@
-<p *ngIf="photoPreview; else photoUrlTemplate">
-	<img [src]="photoPreview" alt="Photo">
-	<strong> {{ photo.relativePath }}</strong>
+<p>
+	<img [src]="photoPreview ? photoPreview : photoUrl" alt="Photo">
 	<button class="btn btn-danger" (click)="deleted()">X</button>
 </p>
-<ng-template #photoUrlTemplate>
-	<img [src]="photoUrl" alt="Photo">
-	<button class="btn btn-danger" (click)="deleted()">X</button>
-</ng-template>

@@ -12,9 +12,8 @@
 		<div formArrayName="recipeIngredients" *ngFor="let recipeIngredient of recipeIngredientsForm.controls; let i = index">
 			<div class="form-group row" [formGroupName]="i">
 				<div class="col-md-5">
-					<select id="{{ 'ingredient' + i }}" formControlName="ingredientId" class="form-control">
-						<option *ngFor="let ingredient of ingredients" [value]="ingredient.id">{{ingredient.name}}</option>
-					</select>
+					<input type="text" id="{{ 'ingredient' + i }}" formControlName="ingredientId"
+						class="form-control" [ngbTypeahead]="search"  [inputFormatter]="formatter" [resultFormatter]="formatter"/>
 					<label attr.for="{{ 'ingredient' + i }}">Składnik</label>
 				</div>
 				<div class="col-md-2">
