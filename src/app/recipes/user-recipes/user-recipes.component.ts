@@ -10,6 +10,7 @@ import { RecipeModel } from './../../_models/recipe.model';
 })
 export class UserRecipesComponent implements OnInit {
 	protected userRecipes: RecipeModel[];
+	protected searchButtonClicked = false;
 
 	constructor(private recipesService: RecipesService) { }
 

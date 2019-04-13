@@ -1,1 +1,5 @@
+<button class="btn btn-info m-3 mb-0" (click)="searchButtonClicked = !searchButtonClicked">
+	<i class="fa fa-search"></i>
+</button>
+<app-recipes-filter [show]="searchButtonClicked" (recipesEmitter)="recipes = $event"></app-recipes-filter>
 <app-recipes-list-view [recipes]="recipes" recipeUrl="private/recipes"></app-recipes-list-view>

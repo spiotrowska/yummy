@@ -35,6 +35,7 @@ import { DashboardRecipeComponent } from './dashboard-recipe/dashboard-recipe.co
 import { FileDropModule } from 'ngx-file-drop';
 import { RecipePhotoPreviewComponent } from './shared/recipe-form/recipe-photo-preview/recipe-photo-preview.component';
 import { NotifierModule } from 'angular-notifier';
+import { RecipesFilterComponent } from './recipes/recipes-filter/recipes-filter.component';
 
 @NgModule({
 	declarations: [
@@ -60,7 +61,8 @@ import { NotifierModule } from 'angular-notifier';
 		RecipeRatingFormComponent,
 		AddRecipeRatingFormComponent,
 		DashboardRecipeComponent,
-		RecipePhotoPreviewComponent
+		RecipePhotoPreviewComponent,
+		RecipesFilterComponent
 	],
 	imports: [
 		BrowserModule,

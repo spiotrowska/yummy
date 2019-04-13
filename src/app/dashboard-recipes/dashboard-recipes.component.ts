@@ -10,6 +10,7 @@ import { RecipesService } from '../_services/recipes.service';
 })
 export class DashboardRecipesComponent implements OnInit {
 	protected recipes: RecipeModel[];
+	protected searchButtonClicked = false;
 
 	constructor(private recipesService: RecipesService) { }
 

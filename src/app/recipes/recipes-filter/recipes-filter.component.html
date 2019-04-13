@@ -1,0 +1,4 @@
+<form [formGroup]="recipesFilterForm" *ngIf="show" class="row m-2">
+	<input type="text" formControlName="phrase" class="form-control col-6" (keyup)="getRecipes()"
+		placeholder="Wpisz nazwę lub składnik"/>
+</form>

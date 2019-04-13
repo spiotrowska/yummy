@@ -1,4 +1,3 @@
-import { AuthUserService } from './../_services/auth-user.service';
 import { RecipesService } from './../_services/recipes.service';
 import { RecipeModel } from './../_models/recipe.model';
 import { Component, OnInit } from '@angular/core';
@@ -11,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipesComponent implements OnInit {
 	protected recipes: RecipeModel[];
+	protected searchButtonClicked = false;
 
 	constructor(private recipesService: RecipesService) { }
 

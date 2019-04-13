@@ -32,4 +32,8 @@ export class RecipesService {
 	deleteRecipe(id: string): Observable<RecipeModel> {
 		return this.http.delete<RecipeModel>(`recipes/${id}`);
 	}
+
+	getRecipesByFilters(phrase: string): Observable<RecipeModel[]> {
+		return this.http.get<RecipeModel[]>('recipes/searcher', { params: { 'filters.phrase': phrase }});
+	}
 }
