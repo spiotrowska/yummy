@@ -1,0 +1,26 @@
+<div class="modal-header">
+	<h4 class="modal-title">Dodaj składnik</h4>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<form [formGroup]="ingredientForm">
+		<div class="form-group">
+			<input formControlName="name" type="text" id="name" class="form-control"/>
+			<label for="name">Nazwa</label>
+		</div>
+		<div class="form-group">
+			<select id="category" formControlName="ingredientCategoryId" class="form-control">
+				<option *ngFor="let ingredientCategory of ingredientCategories" [value]="ingredientCategory.id">
+					{{ingredientCategory.name}}
+				</option>
+			</select>
+			<label for="category">Kategoria składnika</label>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-outline-success" (click)="addIngredient()">Dodaj</button>
+	<button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Close click')">Anuluj</button>
+</div>

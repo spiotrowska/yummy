@@ -1,3 +1,5 @@
+import { AddIngredientModalComponent } from './../../ingredients/add-ingredient-modal/add-ingredient-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { RecipeImageModel } from './../../_models/recipe-image.model';
@@ -32,7 +34,8 @@ export class RecipeFormComponent implements OnInit {
 	constructor(
 		private fb: FormBuilder,
 		private unitsService: UnitsService,
-		private ingredientsService: IngredientsService) { }
+		private ingredientsService: IngredientsService,
+		private modalService: NgbModal) { }
 
 	ngOnInit() {
 		this.getUnits();
@@ -75,6 +78,10 @@ export class RecipeFormComponent implements OnInit {
 		phrase$.switchMap(term => this.ingredientsService.getIngredientsSearcher(term))
 
 	protected formatter = (ingredient: {name: string}) => ingredient.name;
+
+	protected openAddRecipeIngredientModal() {
+		this.modalService.open(AddIngredientModalComponent);
+	}
 
 	private buildForm() {
 		this.recipeForm = this.fb.group({

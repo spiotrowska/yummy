@@ -36,6 +36,7 @@ import { FileDropModule } from 'ngx-file-drop';
 import { RecipePhotoPreviewComponent } from './shared/recipe-form/recipe-photo-preview/recipe-photo-preview.component';
 import { NotifierModule } from 'angular-notifier';
 import { RecipesFilterComponent } from './recipes/recipes-filter/recipes-filter.component';
+import { AddIngredientModalComponent } from './ingredients/add-ingredient-modal/add-ingredient-modal.component';
 
 @NgModule({
 	declarations: [
@@ -62,7 +63,8 @@ import { RecipesFilterComponent } from './recipes/recipes-filter/recipes-filter.
 		AddRecipeRatingFormComponent,
 		DashboardRecipeComponent,
 		RecipePhotoPreviewComponent,
-		RecipesFilterComponent
+		RecipesFilterComponent,
+		AddIngredientModalComponent
 	],
 	imports: [
 		BrowserModule,
@@ -81,6 +83,9 @@ import { RecipesFilterComponent } from './recipes/recipes-filter/recipes-filter.
 		AuthGuard
 	],
 	bootstrap: [AppComponent],
-	entryComponents: [DeleteRecipeModalComponent]
+	entryComponents: [
+		DeleteRecipeModalComponent,
+		AddIngredientModalComponent
+	]
 })
 export class AppModule { }
